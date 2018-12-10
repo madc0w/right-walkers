@@ -69,6 +69,13 @@ function init() {
 	//	addWalker(0.5, 1);
 	//	addWalker(0.51, 0);
 
+
+	$("body").keyup(function(e) {
+		if (e.key == "Escape") {
+			closeWtf();
+		}
+	});
+
 	for (var key in params) {
 		const el = $("#" + params[key].input);
 		el.on("input", setValue);
@@ -102,7 +109,7 @@ function updateStats() {
 		$("#right-walkers").html(0);
 	}
 
-	const expectedRatioRightWalkers = 100 * (0.5 * (1 - params.forceRightProb.value) + params.forceRightProb.value);
+	const expectedRatioRightWalkers = 50 * (1 + params.forceRightProb.value);
 	$("#expected-right-walkers").html(expectedRatioRightWalkers.toFixed(2) + "%");
 
 	$("#right-walkers-ratio").html((params.forceRightProb.value * 100).toFixed(0) + "%");
@@ -187,6 +194,14 @@ function reset() {
 	totalRatioRightWalkers = 0;
 	itNum = 0;
 	walkers = [];
+}
+
+function wtf() {
+	$("#wtf").css("visibility", "visible");
+}
+
+function closeWtf() {
+	$("#wtf").css("visibility", "hidden");
 }
 
 function setValue(event) {

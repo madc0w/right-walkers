@@ -58,6 +58,24 @@
 					<div class="stat-value" id="expected-right-walkers"></div>
 				</div>
 			</div>
+			<div class="button" id="wtf-button" onClick="wtf();">WTF is this?</div>
 		</div>
+	</div>
+	
+	<div id="wtf">
+This is an experiment in self-organizing behavior.  The question posed is "How to get people to follow a simple rule?"  In this case, the simple rule is "Walk on the right."<br/>
+<br/>
+The thesis here is that top-down enforcement of this rule is not necessary to force those who would otherwise pay no heed to the rule to follow it nonetheless.  If a certain ratio of walkers follows the rule, then the others will also do so because it will become more difficult for them to fight oncoming traffic than to move to the right side.<br/>
+<br/>
+All walkers implement simple algorithm: If walking straight ahead would result in a collision with an oncoming walker, then move to the side that is nearest.  There is no bias here.  Walkers will simply move to the right or left, depending on which is more convenient for them.<br/>
+<br/>
+A certain ratio of walkers will always start on the right side of the street.  This is the "right walkers ratio", which you can see in the UI.<br/>
+<br/>
+In addition to this, 50% of non-right walkers will, just by accident, start on the right side of the street.  This means that the expected ratio of right walkers is equal to 0.5 * (1 + right_walker_ratio).<br/>
+<br/>
+The thesis states that the mean number of walkers walking on the right side of the street should exceeds this "expected" number, due to the number of non-right walkers who are forced to move to the right by the relatively small proportion of right walkers.  This phenomenon is indeed demonstrated, to varying degrees, depending on the values of the free parameters.<br/>
+<br/>
+So go play with those free parameters, and see what conditions are needed to get the walkers to behave properly!
+		<div class="button" id="close-wtf-button" onClick="closeWtf();">OK, I get it now.</div>
 	</div>
 </body>
