@@ -1,0 +1,53 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<title>Right Walkers</title>
+</head>
+<body onLoad="onLoad();">
+	<div id="controls">
+		<div class="button" id="pause-go-button" onClick="togglePause();">Pause</div>
+	</div>
+	<div id="main">
+		<div id="canvas-container">
+			<canvas id="canvas" width="600" height="800"></canvas>
+		</div>
+		<div id="stats">
+			<div class="stat">
+				<div class="stat-label">Right walkers ratio</div>
+				<div class="stat-value" id="force-right-prob"></div>
+			</div>
+			<div class="stat">
+				<div class="stat-label">Walker create prob.</div>
+				<div class="stat-value" id="creation-prob"></div>
+			</div>
+			<div class="stat">
+				<div class="stat-label">Walker width</div>
+				<div class="stat-value" id="walker-width"></div>
+			</div>
+			<hr/>
+			<div class="stat">
+				<div class="stat-label">Num walkers</div>
+				<div class="stat-value" id="num-walkers"></div>
+				<div class="stat">
+					<div class="stat-label">mean</div>
+					<div class="stat-value" id="mean-num-walkers"></div>
+				</div>
+			</div>
+			<div class="stat">
+				<div class="stat-label">Num right walkers</div>
+				<div class="stat-value" id="right-walkers"></div>
+				<div class="stat">
+					<div class="stat-label">mean</div>
+					<div class="stat-value" id="mean-right-walkers"></div>
+				</div>
+				<div class="stat">
+					<div class="stat-label">expected</div>
+					<div class="stat-value" id="expected-right-walkers"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

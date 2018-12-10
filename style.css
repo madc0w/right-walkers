@@ -1,0 +1,59 @@
+body {
+	background-color: #ddd;
+	font-family: Lato;
+}
+
+#controls div {
+	display: inline-block;
+}
+
+.button {
+	background-color: orange;
+	border-radius: 6px;
+	padding: 4px;
+	margin: 12px;
+	min-width: 100px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	border-width: 2px;
+	border-color: white;
+	border-style: solid;
+}
+
+#stats {
+	display: inline-block;
+	vertical-align: top;
+	min-width: 200px;
+}
+
+#stats .stat-label {
+	display: inline-block;
+	min-width: 160px;
+}
+
+#stats .stat-value {
+	display: inline-block;
+}
+
+.stat .stat {
+	padding-left: 20px;
+}
+
+.stat .stat .stat-label {
+	min-width: 140px !important;
+}
+
+#canvas-container {
+	display: inline-block;
+	border-style: solid;
+	border-width: 2px;
+	border-color: white;
+	border-radius: 4px;
+	background-color: #888;
+	margin-right: 12px;
+}
+
+#main {
+	display: inline-block;
+}
