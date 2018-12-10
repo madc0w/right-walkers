@@ -3,10 +3,6 @@ body {
 	font-family: Lato;
 }
 
-#controls div {
-	display: inline-block;
-}
-
 .button {
 	background-color: orange;
 	border-radius: 6px;
@@ -36,8 +32,13 @@ body {
 	display: inline-block;
 }
 
+.stat {
+	padding-bottom: 10px;
+}
+
 .stat .stat {
 	padding-left: 20px;
+	padding-bottom: 0px;
 }
 
 .stat .stat .stat-label {
