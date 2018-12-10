@@ -15,7 +15,7 @@ const params = {
 		factor : 600
 	},
 	forceRightProb : {
-		value : 0.25,
+		value : 0,
 		input : "right-walkers-ratio-input",
 		factor : 100
 	},
@@ -94,7 +94,7 @@ function updateStats() {
 	var numRightWalkers = 0;
 	for (var i in walkers) {
 		const walker = walkers[i];
-		if ((walker.pos.x >= 0.5 && walker.vel.y < 0) || (walker.pos.x < 0.5 && walker.vel.y > 0)) {
+		if ((walker.pos.x > 0.5 && walker.vel.y < 0) || (walker.pos.x < 0.5 && walker.vel.y > 0)) {
 			numRightWalkers++;
 		}
 	}
@@ -140,7 +140,8 @@ function step() {
 				const walker2 = walkers[j];
 				if (Math.sign(walker.vel.y) != Math.sign(walker2.vel.y) && Math.abs(walker.pos.x - walker2.pos.x) < 2 * params.walkerRadius.value) {
 					// collision predicted!
-					const dx = Math.abs(walker.vel.y - walker2.vel.y) * ((2 * params.walkerRadius.value) - Math.abs(walker.pos.x - walker2.pos.x)) / (walker.pos.y - walker2.pos.y);
+					const dx = (walker.vel.y - walker2.vel.y) * ((2 * params.walkerRadius.value) - Math.abs(walker.pos.x - walker2.pos.x)) / (walker.pos.y - walker2.pos.y);
+					//					console.log(walker.vel.y, dx);
 					walker.pos.x += dx;
 				}
 			}
