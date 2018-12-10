@@ -57,3 +57,7 @@ body {
 #main {
 	display: inline-block;
 }
+
+.range-input {
+	width: 100px;
+}

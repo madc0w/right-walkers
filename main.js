@@ -1,13 +1,19 @@
-const walkerCreationProb = 1;
-const walkerSpeedInit = 0.01;
-const walkerRadius = 0.05;
-const forceRightProb = 0.25;
+walkerCreationProb = 1;
+walkerSpeedInit = 0.01;
+walkerRadius = 0.05;
+forceRightProb = 0.25;
 
-const walkers = [];
+walkers = [];
 isRunning = true;
 totalNumWalkers = 0;
 totalRatioRightWalkers = 0;
 itNum = 0;
+
+const paramsInputMap = {
+	"right-walkers-ratio-input" : "forceRightProb",
+	"walker-create-prob-input" : "walkerCreationProb",
+	"walker-width-input" : "walkerRadius",
+};
 
 function onLoad() {
 	canvas = $("#canvas")[0];
@@ -46,6 +52,11 @@ function paint() {
 function init() {
 	//	addWalker(0.5, 1);
 	//	addWalker(0.51, 0);
+
+	for (var key in paramsInputMap) {
+		const el = $("#" + key);
+		el.val(this[paramsInputMap[key]] * el.attr("max"));
+	}
 }
 
 function updateStats() {
@@ -76,8 +87,8 @@ function updateStats() {
 	const expectedRatioRightWalkers = 100 * (0.5 * (1 - forceRightProb) + forceRightProb);
 	$("#expected-right-walkers").html(expectedRatioRightWalkers.toFixed(2) + "%");
 
-	$("#force-right-prob").html(forceRightProb * 100 + "%");
-	$("#creation-prob").html(walkerCreationProb * 100 + "%");
+	$("#right-walkers-ratio").html((forceRightProb * 100).toFixed(0) + "%");
+	$("#walker-create-prob").html((walkerCreationProb * 100).toFixed(0) + "%");
 	$("#walker-width").html(walkerRadius * 2);
 }
 
@@ -150,4 +161,15 @@ function addWalker(x, y) {
 function togglePause() {
 	isRunning = !isRunning;
 	$("#pause-go-button").html(isRunning ? "Pause" : "Go");
+}
+
+function reset() {
+	totalNumWalkers = 0;
+	totalRatioRightWalkers = 0;
+	itNum = 0;
+	walkers = [];
+}
+
+function setValue(element) {
+	this[paramsInputMap[element.id]] = element.value / 100;
 }
