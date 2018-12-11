@@ -28,7 +28,7 @@ isRunning = true;
 totalNumWalkers = 0;
 totalRatioRightWalkers = 0;
 itNum = 0;
-const vectorFactor = 24;
+const vectorFactor = 8;
 
 function onLoad() {
 	init();
@@ -54,7 +54,11 @@ function paint() {
 
 		canvasCtx.beginPath();
 		canvasCtx.arc(x, y, walker.radius * canvas.width, 0, 2 * Math.PI, false);
-		canvasCtx.fillStyle = walker.color;
+		var grd = canvasCtx.createRadialGradient(x, y, 0, x, y, walker.radius * canvas.width);
+		grd.addColorStop(0, "rgba(0, 0, 0, 0)");
+		grd.addColorStop(1, walker.color);
+		//		canvasCtx.fillStyle = walker.color;
+		canvasCtx.fillStyle = grd;
 		canvasCtx.fill();
 
 		canvasCtx.beginPath();
