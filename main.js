@@ -17,7 +17,7 @@ const params = {
 		factor : 600
 	},
 	forceRightProb : {
-		value : 0,
+		value : 0.5,
 		input : "right-walkers-ratio-input",
 		factor : 100
 	},
