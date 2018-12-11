@@ -1,16 +1,18 @@
+isTesting = false;
+
 const params = {
 	walkerCreationProb : {
-		value : 0.5,
+		value : 0.2,
 		input : "walker-create-prob-input",
 		factor : 100
 	},
 	walkerSpeed : {
-		value : 0.01,
+		value : 0.003,
 		input : "walker-speed-input",
 		factor : 2000
 	},
 	walkerRadius : {
-		value : 0.06,
+		value : 0.05,
 		input : "walker-width-input",
 		factor : 600
 	},
@@ -26,6 +28,7 @@ isRunning = true;
 totalNumWalkers = 0;
 totalRatioRightWalkers = 0;
 itNum = 0;
+const vectorFactor = 24;
 
 function onLoad() {
 	init();
@@ -56,7 +59,7 @@ function paint() {
 
 		canvasCtx.beginPath();
 		canvasCtx.moveTo(x, y);
-		canvasCtx.lineTo(x + (walker.vel.x * canvas.width * 4), y + (walker.vel.y * canvas.height * 4));
+		canvasCtx.lineTo(x + (walker.vel.x * canvas.width * vectorFactor), y + (walker.vel.y * canvas.height * vectorFactor));
 		canvasCtx.strokeStyle = "red";
 		canvasCtx.stroke();
 	}
@@ -66,9 +69,11 @@ function init() {
 	canvas = $("#canvas")[0];
 	canvas.height = innerHeight - 40;
 	canvasCtx = canvas.getContext("2d");
-	//	addWalker(0.5, 1);
-	//	addWalker(0.51, 0);
 
+	if (isTesting) {
+		addWalker(0.45, 1);
+		addWalker(0.55, 0);
+	}
 
 	$("body").keyup(function(e) {
 		if (e.key == "Escape") {
@@ -119,6 +124,25 @@ function updateStats() {
 }
 
 function step() {
+	for (var i in walkers) {
+		const walker = walkers[i];
+		walkers[i].vel.x = 0;
+		for (var j in walkers) {
+			if (j != i) {
+				const walker2 = walkers[j];
+				if (Math.sign(walker.vel.y) != Math.sign(walker2.vel.y) && Math.abs(walker.pos.x - walker2.pos.x) < 2 * params.walkerRadius.value) {
+					// collision predicted!
+					const numSteps = Math.abs(walker.pos.y - walker2.pos.y) / (Math.abs(walker.vel.y) + Math.abs(walker2.vel.y));
+					var dx = walker2.pos.x - walker.pos.x;
+					dx += (dx < 0 ? 1 : -1) * 2 * params.walkerRadius.value;
+					dx /= numSteps;
+					//					console.log(i, dx, numSteps);
+					walkers[i].vel.x += dx;
+				}
+			}
+		}
+	}
+
 	const toRemove = [];
 	for (var i in walkers) {
 		const walker = walkers[i];
@@ -133,22 +157,7 @@ function step() {
 		walkers.splice(toRemove[i], 1);
 	}
 
-	for (var i in walkers) {
-		const walker = walkers[i];
-		for (var j in walkers) {
-			if (j != i) {
-				const walker2 = walkers[j];
-				if (Math.sign(walker.vel.y) != Math.sign(walker2.vel.y) && Math.abs(walker.pos.x - walker2.pos.x) < 2 * params.walkerRadius.value) {
-					// collision predicted!
-					const dx = (walker.vel.y - walker2.vel.y) * ((2 * params.walkerRadius.value) - Math.abs(walker.pos.x - walker2.pos.x)) / (walker.pos.y - walker2.pos.y);
-					//					console.log(walker.vel.y, dx);
-					walker.pos.x += dx;
-				}
-			}
-		}
-	}
-
-	if (Math.random() < params.walkerCreationProb.value) {
+	if (!isTesting && Math.random() < params.walkerCreationProb.value) {
 		addWalker();
 	}
 }
