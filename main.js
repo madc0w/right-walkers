@@ -12,9 +12,9 @@ const params = {
 		factor : 2000
 	},
 	walkerRadius : {
-		value : 0.05,
+		value : 0.1,
 		input : "walker-width-input",
-		factor : 600
+		factor : 400
 	},
 	forceRightProb : {
 		value : 0.5,
