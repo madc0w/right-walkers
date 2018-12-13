@@ -85,6 +85,12 @@ function init() {
 		}
 	});
 
+	$("body").click(function(e) {
+		if (e.target.id != "wtf-button") {
+			closeWtf();
+		}
+	});
+
 	for (var key in params) {
 		const el = $("#" + params[key].input);
 		el.on("input", setValue);
@@ -208,6 +214,9 @@ function reset() {
 	totalRatioRightWalkers = 0;
 	itNum = 0;
 	walkers = [];
+	if (!isRunning) {
+		togglePause();
+	}
 }
 
 function wtf() {
